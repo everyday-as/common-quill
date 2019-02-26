@@ -1,6 +1,6 @@
 # everyday/commonquill
 
-**everyday/commonquill** is a PHP-based Markdown to Quill parser created by [Everyday](https://everyday.no) which supports the full [CommonMark] spec.  It is based on the [CommonMark JS reference implementation][commonmark.js] by [John MacFarlane] \([@jgm]\) and depends on [league\commonmark](https://github.com/thephpleague/commonmark/)'s brilliant AST implementation.
+**everyday/commonquill** is a PHP-based Markdown to Quill parser created by [Everyday](https://everyday.no) which supports the full [CommonMark] spec. **everyday/commonquill** depends on [league\commonmark](https://github.com/thephpleague/commonmark/)'s brilliant AST implementation.
 
 ## Installation
 
