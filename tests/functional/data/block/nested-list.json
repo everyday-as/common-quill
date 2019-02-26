@@ -1,0 +1,82 @@
+{
+  "ops": [
+    {
+      "insert": "Shopping"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "bullet"
+      }
+    },
+    {
+      "insert": "Milk"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "ordered",
+        "indent": 1
+      }
+    },
+    {
+      "insert": "Eggs"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "ordered",
+        "indent": 1
+      }
+    },
+    {
+      "insert": "Cheese"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "ordered",
+        "indent": 1
+      }
+    },
+    {
+      "insert": "Tasks"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "bullet"
+      }
+    },
+    {
+      "insert": "Code"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "bullet",
+        "indent": 1
+      }
+    },
+    {
+      "insert": "Cook"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "bullet",
+        "indent": 1
+      }
+    },
+    {
+      "insert": "Sleep"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "bullet",
+        "indent": 1
+      }
+    }
+  ]
+}

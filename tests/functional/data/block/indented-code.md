@@ -1,3 +1,1 @@
-```
-    indented fence code
-```
+    indented code

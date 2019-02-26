@@ -1,7 +1,7 @@
 {
   "ops": [
     {
-      "insert": "    indented fence code\n",
+      "insert": "indented code\n",
       "attributes": {
         "code-block": true
       }

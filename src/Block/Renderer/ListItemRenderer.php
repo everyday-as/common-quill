@@ -27,7 +27,7 @@ class ListItemRenderer implements BlockRendererInterface
         $contains_list = false;
 
         foreach ($quillRenderer->renderBlocks($block->children(), true) as $op) {
-            if (!$op->isEmbed()) {
+            if (!$op->isBlockModifier() && !$op->isEmbed()) {
                 // Strip new lines as quill only supports single-line list items
                 $op->setInsert(str_replace("\n", ' ', $op->getInsert()));
             }
@@ -39,6 +39,10 @@ class ListItemRenderer implements BlockRendererInterface
                 $contains_list = true;
             } else {
                 $op->removeAttributes('indent');
+            }
+
+            if ("\n" === $op->getInsert() && empty($op->getAttributes())) {
+                continue;
             }
 
             $ops[] = $op;

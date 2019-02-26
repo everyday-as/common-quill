@@ -1,7 +1,7 @@
 {
   "ops": [
     {
-      "insert": "blockquote "
+      "insert": "blockquote"
     },
     {
       "insert": "\n",

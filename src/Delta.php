@@ -77,7 +77,7 @@ class Delta implements \JsonSerializable
                 continue;
             }
 
-            $this->ops[$i] = DeltaOp::text($op1_insert.$op2_insert, $op1_attributes);
+            $this->ops[$i] = DeltaOp::text($op1_insert . $op2_insert, $op1_attributes);
 
             $this->ops[$i + 1] = false;
 
@@ -90,7 +90,7 @@ class Delta implements \JsonSerializable
     }
 
     /**
-     * Convert a delta to plain text;.
+     * Convert a delta to plaintext.
      *
      * @return string
      */
@@ -107,6 +107,9 @@ class Delta implements \JsonSerializable
         return $string;
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize(): array
     {
         $ops = $this->ops;

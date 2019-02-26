@@ -30,7 +30,7 @@ class BlockQuoteRenderer implements BlockRendererInterface
         foreach ($quillRenderer->renderBlocks($block->children()) as $op) {
             if (!$op->isEmbed()) {
                 // Strip new lines as quill only supports single-line block quotes
-                $op->setInsert(str_replace("\n", ' ', $op->getInsert()));
+                $op->setInsert(str_replace("\n", ' ', trim($op->getInsert())));
             }
 
             // Remove certain block attributes from op
