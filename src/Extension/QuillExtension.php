@@ -1,4 +1,5 @@
 <?php
+
 namespace Everyday\CommonQuill\Extension;
 
 use Everyday\CommonQuill\Block\Renderer as BlockRenderer;
