@@ -1,4 +1,5 @@
 <?php
+
 namespace Everyday\CommonQuill;
 
 interface ConverterInterface
