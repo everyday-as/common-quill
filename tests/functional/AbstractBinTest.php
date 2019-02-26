@@ -12,7 +12,7 @@ abstract class AbstractBinTest extends TestCase
      */
     protected function getPathToCommonquill()
     {
-        return realpath(__DIR__ . '/../../bin/commonquill');
+        return realpath(__DIR__.'/../../bin/commonquill');
     }
 
     /**

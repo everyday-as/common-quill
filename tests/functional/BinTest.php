@@ -5,7 +5,7 @@ namespace Everyday\CommonQuill\Tests\Functional;
 class BinTest extends AbstractBinTest
 {
     /**
-     * Tests the behavior of not providing any Markdown input
+     * Tests the behavior of not providing any Markdown input.
      */
     public function testNoArgsOrStdin()
     {
@@ -21,7 +21,7 @@ class BinTest extends AbstractBinTest
     }
 
     /**
-     * Tests the -h flag
+     * Tests the -h flag.
      */
     public function testHelpShortFlag()
     {
@@ -34,7 +34,7 @@ class BinTest extends AbstractBinTest
     }
 
     /**
-     * Tests the --help option
+     * Tests the --help option.
      */
     public function testHelpOption()
     {
@@ -47,7 +47,7 @@ class BinTest extends AbstractBinTest
     }
 
     /**
-     * Tests the behavior of using unknown options
+     * Tests the behavior of using unknown options.
      */
     public function testUnknownOption()
     {
@@ -63,7 +63,7 @@ class BinTest extends AbstractBinTest
     }
 
     /**
-     * Returns the full path to the test data file
+     * Returns the full path to the test data file.
      *
      * @param string $file
      *
@@ -71,6 +71,6 @@ class BinTest extends AbstractBinTest
      */
     protected function getPathToData($file)
     {
-        return realpath(__DIR__ . '/data/' . $file);
+        return realpath(__DIR__.'/data/'.$file);
     }
 }
