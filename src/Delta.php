@@ -20,11 +20,11 @@ class Delta implements \JsonSerializable
     }
 
     /**
-     * @param DeltaOp $op
+     * @return array
      */
-    public function pushOp(DeltaOp $op): void
+    public function getOps(): array
     {
-        $this->ops[] = $op;
+        return $this->ops;
     }
 
     /**

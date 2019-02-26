@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jojop
- * Date: 25/02/2019
- * Time: 21:24.
- */
-
 namespace Everyday\CommonQuill\Extension;
 
 use Everyday\CommonQuill\Block\Renderer as BlockRenderer;

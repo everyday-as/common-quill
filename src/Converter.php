@@ -36,7 +36,7 @@ class Converter implements ConverterInterface
     /**
      * @param string $commonMark
      *
-     * @return DeltaOp[]
+     * @return Delta
      */
     public function convertToQuill($commonMark)
     {
