@@ -10,21 +10,9 @@ $options_raw = getopt('', array(
     'use-underscore',
     'enable-strong',
     'enable-em',
-    'safe',
 ));
 
 foreach ($options_raw as $option => $value) {
-    switch ($option) {
-        case 'use-asterisk':
-        case 'use-underscore':
-        case 'enable-strong':
-        case 'enable-em':
-        case 'safe':
-            if ($value !== true && $value !== false) {
-                fail("Invalid value '$value' for option '$option'");
-            }
-            break;
-    }
     $options[str_replace('-', '_', $option)] = $value;
 }
 
@@ -39,9 +27,6 @@ foreach ($argv as $i => $arg) {
             case '--help':
                 echo getHelpText();
                 exit(0);
-            case '--safe':
-                $options['safe'] = true;
-                break;
             default:
                 $option = explode('=', $arg, 2)[0];
                 if (!preg_match('/^--[^-]/', $option)
@@ -90,8 +75,6 @@ CommonQuill - Markdown to Quill conversions done right
 Usage: commonquill [OPTIONS] [FILE]
     -h, --help    Shows help and usage information
     
-    -v, --version Shows the currently installed version
-    
     (Reading data from STDIN is not currently supported on Windows)
     
 Examples:
@@ -101,7 +84,7 @@ Examples:
     Converting a file and saving its output:
         commonquill document.md > output.json
         
-Full documentation can be found at http://commonmark.thephpleague.com/
+Full documentation can be found at https://github.com/Everyday-AS/common-quill
 WINDOWSHELP;
     }
     return <<<HELP
@@ -110,10 +93,6 @@ CommonQuill - Markdown to Quill conversions done right
 Usage: commonquill [OPTIONS] [FILE]
 
     -h, --help    Shows help and usage information
-    
-    -v, --version Shows the currently installed version
-    
-    --safe        Escapes all raw HTML input and removes unsafe URLs
     
     If no file is given, input will be read from STDIN
     
@@ -129,9 +108,9 @@ Examples:
         echo -e '# Hello World!' | commonquill
         
     Converting from STDIN and saving the output:
-        echo -e '# Hello World!' | commonquill > output.html
+        echo -e '# Hello World!' | commonquill > output.json
         
-Full documentation can be found at http://commonmark.thephpleague.com/
+Full documentation can be found at https://github.com/Everyday-AS/common-quill
 HELP;
 }
 
