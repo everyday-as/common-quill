@@ -5,6 +5,7 @@
   "keywords": ["markdown", "quill", "commonmark", "delta"],
   "homepage": "https://github.com/Everyday-AS/common-quill",
   "readme": "README.md",
+  "version": "0.1.0",
   "authors": [
     {
       "name": "Everyday AS",
