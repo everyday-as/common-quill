@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: jojop
  * Date: 25/02/2019
- * Time: 22:25
+ * Time: 22:25.
  */
 
 namespace Everyday\CommonQuill;
-
 
 interface ConverterInterface
 {

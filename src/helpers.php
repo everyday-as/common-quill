@@ -2,7 +2,8 @@
 
 namespace Everyday\CommonQuill;
 
-function array_flatten($array) {
+function array_flatten($array)
+{
     if (!is_array($array)) {
         return [$array];
     }

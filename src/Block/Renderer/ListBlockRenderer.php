@@ -20,7 +20,7 @@ class ListBlockRenderer implements BlockRendererInterface
     public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
     {
         if (!($block instanceof ListBlock)) {
-            throw new \InvalidArgumentException('Incompatible block type: ' . get_class($block));
+            throw new \InvalidArgumentException('Incompatible block type: '.get_class($block));
         }
 
         // All lists are tight
@@ -35,10 +35,12 @@ class ListBlockRenderer implements BlockRendererInterface
         if ($inTightList) {
             $parent = $block->parent();
 
-            while (!($parent instanceof ListBlock)) $parent = $parent->parent();
+            while (!($parent instanceof ListBlock)) {
+                $parent = $parent->parent();
+            }
 
             $ops = array_merge([
-                DeltaOp::blockModifier('list', strtolower($parent->getListData()->type))
+                DeltaOp::blockModifier('list', strtolower($parent->getListData()->type)),
             ], $ops);
         }
 

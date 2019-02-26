@@ -20,7 +20,7 @@ class FencedCodeRenderer implements BlockRendererInterface
     public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
     {
         if (!($block instanceof FencedCode)) {
-            throw new \InvalidArgumentException('Incompatible block type: ' . get_class($block));
+            throw new \InvalidArgumentException('Incompatible block type: '.get_class($block));
         }
 
         return DeltaOp::text($block->getStringContent(), ['code-block' => true]);

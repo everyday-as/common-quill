@@ -19,7 +19,7 @@ class TextRenderer implements InlineRendererInterface
     public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
     {
         if (!($inline instanceof Text)) {
-            throw new \InvalidArgumentException('Incompatible inline type: ' . get_class($inline));
+            throw new \InvalidArgumentException('Incompatible inline type: '.get_class($inline));
         }
 
         return DeltaOp::text($inline->getContent());

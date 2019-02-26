@@ -19,7 +19,7 @@ class EmphasisRenderer implements InlineRendererInterface
     public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
     {
         if (!($inline instanceof Emphasis)) {
-            throw new \InvalidArgumentException('Incompatible inline type: ' . get_class($inline));
+            throw new \InvalidArgumentException('Incompatible inline type: '.get_class($inline));
         }
 
         /** @var \Everyday\CommonQuill\DeltaOp[] $ops */
