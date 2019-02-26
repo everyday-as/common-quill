@@ -1,0 +1,14 @@
+{
+  "require": {
+    "league/commonmark": "^0.18.1",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Everyday\\CommonQuill\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  }
+}
