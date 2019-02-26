@@ -2,7 +2,7 @@
 
 namespace Everyday\CommonQuill\Inline\Renderer;
 
-use Everyday\CommonQuill\DeltaOp;
+use Everyday\QuillDelta\DeltaOp;
 use League\CommonMark\ElementRendererInterface;
 use League\CommonMark\Inline\Element\AbstractInline;
 use League\CommonMark\Inline\Element\Strong;
@@ -22,7 +22,6 @@ class StrongRenderer implements InlineRendererInterface
             throw new \InvalidArgumentException('Incompatible inline type: '.get_class($inline));
         }
 
-        /** @var \Everyday\CommonQuill\DeltaOp[] $ops */
         $ops = $quillRenderer->renderInlines($inline->children());
 
         DeltaOp::applyAttributes($ops, ['bold' => true]);

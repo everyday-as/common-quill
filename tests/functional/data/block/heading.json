@@ -10,7 +10,7 @@
       }
     },
     {
-      "insert": "Heading 2"
+      "insert": "\nHeading 2"
     },
     {
       "insert": "\n",
@@ -19,7 +19,7 @@
       }
     },
     {
-      "insert": "Heading 3"
+      "insert": "\nHeading 3"
     },
     {
       "insert": "\n",
@@ -28,7 +28,7 @@
       }
     },
     {
-      "insert": "Heading 4"
+      "insert": "\nHeading 4"
     },
     {
       "insert": "\n",
@@ -37,7 +37,7 @@
       }
     },
     {
-      "insert": "Heading 5"
+      "insert": "\nHeading 5"
     },
     {
       "insert": "\n",
@@ -46,7 +46,7 @@
       }
     },
     {
-      "insert": "Heading 6"
+      "insert": "\nHeading 6"
     },
     {
       "insert": "\n",

@@ -2,8 +2,8 @@
 
 namespace Everyday\CommonQuill\Inline\Renderer;
 
-use Everyday\CommonQuill\Delta;
-use Everyday\CommonQuill\DeltaOp;
+use Everyday\QuillDelta\Delta;
+use Everyday\QuillDelta\DeltaOp;
 use League\CommonMark\ElementRendererInterface;
 use League\CommonMark\Inline\Element\AbstractInline;
 use League\CommonMark\Inline\Element\Image;

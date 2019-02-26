@@ -2,7 +2,7 @@
 
 namespace Everyday\CommonQuill\Block\Renderer;
 
-use Everyday\CommonQuill\DeltaOp;
+use Everyday\QuillDelta\DeltaOp;
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Element\BlockQuote;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;
@@ -42,7 +42,7 @@ class BlockQuoteRenderer implements BlockRendererInterface
         if (1 === count($ops)) {
             $ops[0]->setAttribute('blockquote', true);
         } else {
-            $ops[] = DeltaOp::text("\n", ['blockquote' => true]);
+            $ops[] = DeltaOp::blockModifier('blockquote');
         }
 
         return $ops;

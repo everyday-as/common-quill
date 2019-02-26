@@ -4,8 +4,47 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "323e16f3e4abfa522267d9d1723bc173",
+    "content-hash": "52926bf1e09bfa447536b76dfb51e499",
     "packages": [
+        {
+            "name": "everyday/php-quill-delta",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Everyday-AS/php-quill-delta.git",
+                "reference": "1550def1d76de1173e9351fe7d2d5ed329038271"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Everyday-AS/php-quill-delta/zipball/1550def1d76de1173e9351fe7d2d5ed329038271",
+                "reference": "1550def1d76de1173e9351fe7d2d5ed329038271",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Everyday\\QuillDelta\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Everyday AS",
+                    "email": "system@everyday.no",
+                    "homepage": "https://everyday.no"
+                }
+            ],
+            "description": "PHP Markdown to Quill Delta parser based on the CommonMark spec",
+            "homepage": "https://github.com/Everyday-AS/php-quill-delta",
+            "keywords": [
+                "delta",
+                "quill"
+            ],
+            "time": "2019-02-26T22:22:45+00:00"
+        },
         {
             "name": "league/commonmark",
             "version": "0.18.1",

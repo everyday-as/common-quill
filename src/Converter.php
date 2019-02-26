@@ -2,6 +2,7 @@
 
 namespace Everyday\CommonQuill;
 
+use Everyday\QuillDelta\Delta;
 use League\CommonMark\DocParser;
 use League\CommonMark\ElementRendererInterface;
 

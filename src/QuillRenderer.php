@@ -38,7 +38,7 @@ class QuillRenderer implements ElementRendererInterface
      *
      * @throws \RuntimeException
      *
-     * @return DeltaOp[]
+     * @return \Everyday\QuillDelta\DeltaOp[]
      */
     protected function renderInline(AbstractInline $inline)
     {
@@ -54,7 +54,7 @@ class QuillRenderer implements ElementRendererInterface
     /**
      * @param AbstractInline[] $inlines
      *
-     * @return DeltaOp[]
+     * @return \Everyday\QuillDelta\DeltaOp[]
      */
     public function renderInlines($inlines)
     {
@@ -73,7 +73,7 @@ class QuillRenderer implements ElementRendererInterface
      *
      * @throws \RuntimeException
      *
-     * @return DeltaOp[]
+     * @return \Everyday\QuillDelta\DeltaOp[]
      */
     public function renderBlock(AbstractBlock $block, $inTightList = false)
     {
@@ -90,7 +90,7 @@ class QuillRenderer implements ElementRendererInterface
      * @param AbstractBlock[] $blocks
      * @param bool            $inTightList
      *
-     * @return DeltaOp[]
+     * @return \Everyday\QuillDelta\DeltaOp[]
      */
     public function renderBlocks($blocks, $inTightList = false)
     {

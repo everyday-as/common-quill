@@ -2,7 +2,7 @@
 
 namespace Everyday\CommonQuill\Block\Renderer;
 
-use Everyday\CommonQuill\DeltaOp;
+use Everyday\QuillDelta\DeltaOp;
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Element\HtmlBlock;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;

@@ -2,6 +2,8 @@
 
 namespace Everyday\CommonQuill;
 
+use Everyday\QuillDelta\Delta;
+
 interface ConverterInterface
 {
     /**

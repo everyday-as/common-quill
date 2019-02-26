@@ -2,7 +2,7 @@
 
 namespace Everyday\CommonQuill\Block\Renderer;
 
-use Everyday\CommonQuill\DeltaOp;
+use Everyday\QuillDelta\DeltaOp;
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Element\Heading;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;
@@ -23,10 +23,10 @@ class HeadingRenderer implements BlockRendererInterface
             throw new \InvalidArgumentException('Incompatible block type: '.get_class($block));
         }
 
-        $ops = $quillRenderer->renderInlines($block->children());
-
-        $ops[] = DeltaOp::text("\n", ['header' => $block->getLevel()]);
-
-        return $ops;
+        return array_merge(
+            [DeltaOp::text("\n")],
+            $quillRenderer->renderInlines($block->children()),
+            [DeltaOp::blockModifier('header', $block->getLevel())]
+        );
     }
 }

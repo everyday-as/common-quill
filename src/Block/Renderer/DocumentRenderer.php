@@ -2,7 +2,7 @@
 
 namespace Everyday\CommonQuill\Block\Renderer;
 
-use Everyday\CommonQuill\Delta;
+use Everyday\QuillDelta\Delta;
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Element\Document;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;
@@ -30,8 +30,13 @@ class DocumentRenderer implements BlockRendererInterface, ConfigurationAwareInte
             throw new \InvalidArgumentException('Incompatible block type: '.get_class($block));
         }
 
-        /** @var Delta $delta */
-        $delta = new Delta($quillRenderer->renderBlocks($block->children()));
+        $ops = $quillRenderer->renderBlocks($block->children());
+
+        if (!empty($ops) && !$ops[0]->isEmbed() && !$ops[0]->isBlockModifier()) {
+            $ops[0]->setInsert(ltrim($ops[0]->getInsert()));
+        }
+
+        $delta = new Delta($ops);
 
         if ($this->config->getConfig('compact_delta')) {
             $delta->compact();

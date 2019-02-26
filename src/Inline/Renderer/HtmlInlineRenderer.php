@@ -2,7 +2,7 @@
 
 namespace Everyday\CommonQuill\Inline\Renderer;
 
-use Everyday\CommonQuill\DeltaOp;
+use Everyday\QuillDelta\DeltaOp;
 use League\CommonMark\ElementRendererInterface;
 use League\CommonMark\Inline\Element\AbstractInline;
 use League\CommonMark\Inline\Element\HtmlInline;
