@@ -22,6 +22,10 @@ class NewlineRenderer implements InlineRendererInterface
             throw new \InvalidArgumentException('Incompatible inline type: '.get_class($inline));
         }
 
-        return DeltaOp::text("\n");
+        if (Newline::HARDBREAK === $inline->getType()) {
+            return DeltaOp::text("\n");
+        }
+
+        return DeltaOp::text(' ');
     }
 }

@@ -1,7 +1,7 @@
 {
   "ops": [
     {
-      "insert": "newline\nnewline"
+      "insert": "Line 1-1 Line 1-2\nLine 2-1 Line 2-2"
     },
     {
       "insert": "\n"
