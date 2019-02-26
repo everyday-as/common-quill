@@ -1,0 +1,10 @@
+{
+  "ops": [
+    {
+      "insert": "normal text"
+    },
+    {
+      "insert": "\n"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "ops": [
+    {
+      "insert": "blockquote "
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "blockquote": true
+      }
+    }
+  ]
+}

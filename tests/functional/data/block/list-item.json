@@ -1,0 +1,31 @@
+{
+  "ops": [
+    {
+      "insert": "list item"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "ordered"
+      }
+    },
+    {
+      "insert": "list item 2"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "ordered"
+      }
+    },
+    {
+      "insert": "list item 3"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "ordered"
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "ops": [
+    {
+      "insert": "fenced code\n",
+      "attributes": {
+        "code-block": true
+      }
+    },
+    {
+      "insert": "\n"
+    }
+  ]
+}

@@ -1,7 +1,23 @@
 {
+  "name": "everyday/commonquill",
+  "type": "library",
+  "description": "PHP Markdown to Quill Delta parser based on the CommonMark spec",
+  "keywords": ["markdown", "quill", "commonmark", "delta"],
+  "homepage": "https://github.com/Everyday-AS/common-quill",
+  "readme": "README.md",
+  "authors": [
+    {
+      "name": "Everyday AS",
+      "email": "system@everyday.no",
+      "homepage": "https://everyday.no"
+    }
+  ],
   "require": {
     "league/commonmark": "^0.18.1",
-    "ext-json": "*"
+    "ext-json": "*",
+    "phpunit/phpunit": "^7.5",
+    "mikehaertl/php-shellcommand": "^1.4",
+    "symfony/finder": "^4.2"
   },
   "autoload": {
     "psr-4": {
@@ -10,5 +26,6 @@
     "files": [
       "src/helpers.php"
     ]
-  }
+  },
+  "bin": ["bin/commonquill"]
 }

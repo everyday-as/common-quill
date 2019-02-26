@@ -1,0 +1,10 @@
+{
+  "ops": [
+    {
+      "insert": "paragraph 1\nparagraph 2"
+    },
+    {
+      "insert": "\n"
+    }
+  ]
+}

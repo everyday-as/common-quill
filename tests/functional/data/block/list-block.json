@@ -1,0 +1,31 @@
+{
+  "ops": [
+    {
+      "insert": "list"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "bullet"
+      }
+    },
+    {
+      "insert": "list 2"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "bullet"
+      }
+    },
+    {
+      "insert": "list 3"
+    },
+    {
+      "insert": "\n",
+      "attributes": {
+        "list": "bullet"
+      }
+    }
+  ]
+}

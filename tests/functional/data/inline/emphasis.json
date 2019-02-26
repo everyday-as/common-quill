@@ -1,0 +1,13 @@
+{
+  "ops": [
+    {
+      "insert": "emphasis",
+      "attributes": {
+        "italic": true
+      }
+    },
+    {
+      "insert": "\n"
+    }
+  ]
+}

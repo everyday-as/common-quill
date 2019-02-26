@@ -1,0 +1,10 @@
+{
+  "ops": [
+    {
+      "insert": "newline\nnewline"
+    },
+    {
+      "insert": "\n"
+    }
+  ]
+}
