@@ -77,7 +77,7 @@ class Delta implements \JsonSerializable
                 continue;
             }
 
-            $this->ops[$i] = DeltaOp::text($op1_insert . $op2_insert, $op1_attributes);
+            $this->ops[$i] = DeltaOp::text($op1_insert.$op2_insert, $op1_attributes);
 
             $this->ops[$i + 1] = false;
 
