@@ -30,7 +30,7 @@ class QuillRenderer implements ElementRendererInterface
      */
     public function getOption($option, $default = null)
     {
-        return $this->environment->getConfig('renderer/' . $option, $default);
+        return $this->environment->getConfig('renderer/'.$option, $default);
     }
 
     /**
@@ -45,7 +45,7 @@ class QuillRenderer implements ElementRendererInterface
         $renderer = $this->environment->getInlineRendererForClass(get_class($inline));
 
         if (!$renderer) {
-            throw new \RuntimeException('Unable to find corresponding renderer for inline type ' . get_class($inline));
+            throw new \RuntimeException('Unable to find corresponding renderer for inline type '.get_class($inline));
         }
 
         return $renderer->render($inline, $this);
@@ -80,7 +80,7 @@ class QuillRenderer implements ElementRendererInterface
         $renderer = $this->environment->getBlockRendererForClass(get_class($block));
 
         if (!$renderer) {
-            throw new \RuntimeException('Unable to find corresponding renderer for block type ' . get_class($block));
+            throw new \RuntimeException('Unable to find corresponding renderer for block type '.get_class($block));
         }
 
         return $renderer->render($block, $this, $inTightList);

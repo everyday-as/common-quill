@@ -35,7 +35,7 @@ class QuillConverter extends Converter
         $environment->addExtension(new QuillExtension());
 
         $environment->mergeConfig([
-            'compact_delta' => true,
+            'compact_delta'      => true,
             'allow_unsafe_links' => true,
             'max_nesting_level'  => INF,
         ]);

@@ -2,7 +2,6 @@
 
 namespace Everyday\CommonQuill;
 
-
 class Delta implements \JsonSerializable
 {
     /**
@@ -78,7 +77,7 @@ class Delta implements \JsonSerializable
                 continue;
             }
 
-            $this->ops[$i] = DeltaOp::text($op1_insert . $op2_insert, $op1_attributes);
+            $this->ops[$i] = DeltaOp::text($op1_insert.$op2_insert, $op1_attributes);
 
             $this->ops[$i + 1] = false;
 
@@ -91,7 +90,7 @@ class Delta implements \JsonSerializable
     }
 
     /**
-     * Convert a delta to plain text;
+     * Convert a delta to plain text;.
      *
      * @return string
      */

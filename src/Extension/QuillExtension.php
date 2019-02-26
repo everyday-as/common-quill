@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: jojop
  * Date: 25/02/2019
- * Time: 21:24
+ * Time: 21:24.
  */
 
 namespace Everyday\CommonQuill\Extension;
@@ -71,15 +71,15 @@ class QuillExtension extends Extension
     public function getBlockRenderers()
     {
         return [
-            BlockElement\BlockQuote::class => new BlockRenderer\BlockQuoteRenderer(),
-            BlockElement\Document::class => new BlockRenderer\DocumentRenderer(),
-            BlockElement\FencedCode::class => new BlockRenderer\FencedCodeRenderer(),
-            BlockElement\Heading::class => new BlockRenderer\HeadingRenderer(),
-            BlockElement\HtmlBlock::class => new BlockRenderer\HtmlBlockRenderer(),
-            BlockElement\IndentedCode::class => new BlockRenderer\IndentedCodeRenderer(),
-            BlockElement\ListBlock::class => new BlockRenderer\ListBlockRenderer(),
-            BlockElement\ListItem::class => new BlockRenderer\ListItemRenderer(),
-            BlockElement\Paragraph::class => new BlockRenderer\ParagraphRenderer(),
+            BlockElement\BlockQuote::class    => new BlockRenderer\BlockQuoteRenderer(),
+            BlockElement\Document::class      => new BlockRenderer\DocumentRenderer(),
+            BlockElement\FencedCode::class    => new BlockRenderer\FencedCodeRenderer(),
+            BlockElement\Heading::class       => new BlockRenderer\HeadingRenderer(),
+            BlockElement\HtmlBlock::class     => new BlockRenderer\HtmlBlockRenderer(),
+            BlockElement\IndentedCode::class  => new BlockRenderer\IndentedCodeRenderer(),
+            BlockElement\ListBlock::class     => new BlockRenderer\ListBlockRenderer(),
+            BlockElement\ListItem::class      => new BlockRenderer\ListItemRenderer(),
+            BlockElement\Paragraph::class     => new BlockRenderer\ParagraphRenderer(),
             BlockElement\ThematicBreak::class => new BlockRenderer\ThematicBreakRenderer(),
         ];
     }
@@ -90,14 +90,14 @@ class QuillExtension extends Extension
     public function getInlineRenderers()
     {
         return [
-            InlineElement\Code::class => new InlineRenderer\CodeRenderer(),
-            InlineElement\Emphasis::class => new InlineRenderer\EmphasisRenderer(),
+            InlineElement\Code::class       => new InlineRenderer\CodeRenderer(),
+            InlineElement\Emphasis::class   => new InlineRenderer\EmphasisRenderer(),
             InlineElement\HtmlInline::class => new InlineRenderer\HtmlInlineRenderer(),
-            InlineElement\Image::class => new InlineRenderer\ImageRenderer(),
-            InlineElement\Link::class => new InlineRenderer\LinkRenderer(),
-            InlineElement\Newline::class => new InlineRenderer\NewlineRenderer(),
-            InlineElement\Strong::class => new InlineRenderer\StrongRenderer(),
-            InlineElement\Text::class => new InlineRenderer\TextRenderer(),
+            InlineElement\Image::class      => new InlineRenderer\ImageRenderer(),
+            InlineElement\Link::class       => new InlineRenderer\LinkRenderer(),
+            InlineElement\Newline::class    => new InlineRenderer\NewlineRenderer(),
+            InlineElement\Strong::class     => new InlineRenderer\StrongRenderer(),
+            InlineElement\Text::class       => new InlineRenderer\TextRenderer(),
         ];
     }
 }

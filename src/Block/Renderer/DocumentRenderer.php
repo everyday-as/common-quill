@@ -27,7 +27,7 @@ class DocumentRenderer implements BlockRendererInterface, ConfigurationAwareInte
     public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
     {
         if (!($block instanceof Document)) {
-            throw new \InvalidArgumentException('Incompatible block type: ' . get_class($block));
+            throw new \InvalidArgumentException('Incompatible block type: '.get_class($block));
         }
 
         /** @var Delta $delta */

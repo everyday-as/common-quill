@@ -28,7 +28,7 @@ class ImageRenderer implements InlineRendererInterface, ConfigurationAwareInterf
     public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
     {
         if (!($inline instanceof Image)) {
-            throw new \InvalidArgumentException('Incompatible inline type: ' . get_class($inline));
+            throw new \InvalidArgumentException('Incompatible inline type: '.get_class($inline));
         }
 
         $src = $inline->getUrl();
