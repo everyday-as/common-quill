@@ -21,7 +21,7 @@ class ImageRenderer implements InlineRendererInterface, ConfigurationAwareInterf
     protected $config;
 
     /**
-     * @param AbstractInline $inline
+     * @param AbstractInline           $inline
      * @param ElementRendererInterface $quillRenderer
      *
      * @return string
@@ -29,7 +29,7 @@ class ImageRenderer implements InlineRendererInterface, ConfigurationAwareInterf
     public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
     {
         if (!($inline instanceof Image)) {
-            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($inline));
+            throw new InvalidArgumentException('Incompatible inline type: '.get_class($inline));
         }
 
         $src = $inline->getUrl();

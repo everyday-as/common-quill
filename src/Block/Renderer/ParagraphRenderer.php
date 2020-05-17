@@ -12,16 +12,16 @@ use League\CommonMark\ElementRendererInterface;
 class ParagraphRenderer implements BlockRendererInterface
 {
     /**
-     * @param AbstractBlock $block
+     * @param AbstractBlock            $block
      * @param ElementRendererInterface $quillRenderer
-     * @param bool $inTightList
+     * @param bool                     $inTightList
      *
      * @return string
      */
     public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
     {
         if (!($block instanceof Paragraph)) {
-            throw new InvalidArgumentException('Incompatible block type: ' . get_class($block));
+            throw new InvalidArgumentException('Incompatible block type: '.get_class($block));
         }
 
         $ops = unserialize($quillRenderer->renderInlines($block->children()));

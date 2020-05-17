@@ -13,7 +13,7 @@ class QuillConverter extends Converter
     /**
      * Create a new quill converter instance.
      *
-     * @param array $config
+     * @param array                $config
      * @param EnvironmentInterface $environment
      */
     public function __construct(array $config = [], ?EnvironmentInterface $environment = null)
@@ -38,9 +38,9 @@ class QuillConverter extends Converter
             ->addExtension(new QuillExtension());
 
         $environment->mergeConfig([
-            'compact_delta' => true,
+            'compact_delta'      => true,
             'allow_unsafe_links' => true,
-            'max_nesting_level' => INF,
+            'max_nesting_level'  => INF,
         ]);
 
         return $environment;

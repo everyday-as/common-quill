@@ -20,9 +20,9 @@ class DocumentRenderer implements BlockRendererInterface, ConfigurationAwareInte
     protected $config;
 
     /**
-     * @param AbstractBlock $block
+     * @param AbstractBlock            $block
      * @param ElementRendererInterface $quillRenderer
-     * @param bool $inTightList
+     * @param bool                     $inTightList
      *
      * @return string
      */
