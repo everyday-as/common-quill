@@ -2,6 +2,7 @@
 
 namespace Everyday\CommonQuill;
 
+use function get_class;
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;
 use League\CommonMark\ElementRendererInterface;
@@ -9,7 +10,6 @@ use League\CommonMark\EnvironmentInterface;
 use League\CommonMark\Inline\Element\AbstractInline;
 use League\CommonMark\Inline\Renderer\InlineRendererInterface;
 use RuntimeException;
-use function get_class;
 
 class QuillRenderer implements ElementRendererInterface
 {
@@ -28,21 +28,21 @@ class QuillRenderer implements ElementRendererInterface
 
     /**
      * @param string $option
-     * @param mixed $default
+     * @param mixed  $default
      *
      * @return mixed
      */
     public function getOption($option, $default = null)
     {
-        return $this->environment->getConfig('renderer/' . $option, $default);
+        return $this->environment->getConfig('renderer/'.$option, $default);
     }
 
     /**
      * @param AbstractInline $inline
      *
-     * @return string
      * @throws RuntimeException
      *
+     * @return string
      */
     public function renderInline(AbstractInline $inline): string
     {
@@ -55,7 +55,7 @@ class QuillRenderer implements ElementRendererInterface
             }
         }
 
-        throw new RuntimeException('Unable to find corresponding renderer for inline type ' . get_class($inline));
+        throw new RuntimeException('Unable to find corresponding renderer for inline type '.get_class($inline));
     }
 
     /**
@@ -76,11 +76,11 @@ class QuillRenderer implements ElementRendererInterface
 
     /**
      * @param AbstractBlock $block
-     * @param bool $inTightList
+     * @param bool          $inTightList
      *
-     * @return string
      * @throws RuntimeException
      *
+     * @return string
      */
     public function renderBlock(AbstractBlock $block, $inTightList = false): string
     {
@@ -93,12 +93,12 @@ class QuillRenderer implements ElementRendererInterface
             }
         }
 
-        throw new RuntimeException('Unable to find corresponding renderer for block type ' . get_class($block));
+        throw new RuntimeException('Unable to find corresponding renderer for block type '.get_class($block));
     }
 
     /**
      * @param AbstractBlock[] $blocks
-     * @param bool $inTightList
+     * @param bool            $inTightList
      *
      * @return string
      */

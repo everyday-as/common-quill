@@ -24,16 +24,17 @@ class HtmlInlineRenderer implements InlineRendererInterface
     }
 
     /**
-     * @param AbstractInline $inline
+     * @param AbstractInline           $inline
      * @param ElementRendererInterface $quillRenderer
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
     {
         if (!($inline instanceof HtmlInline)) {
-            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($inline));
+            throw new InvalidArgumentException('Incompatible inline type: '.get_class($inline));
         }
 
         // TODO: Render the HTML inline to a Quill delta

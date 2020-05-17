@@ -12,7 +12,7 @@ use League\CommonMark\Inline\Renderer\InlineRendererInterface;
 class CodeRenderer implements InlineRendererInterface
 {
     /**
-     * @param AbstractInline $inline
+     * @param AbstractInline           $inline
      * @param ElementRendererInterface $quillRenderer
      *
      * @return string
@@ -20,7 +20,7 @@ class CodeRenderer implements InlineRendererInterface
     public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
     {
         if (!($inline instanceof Code)) {
-            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($inline));
+            throw new InvalidArgumentException('Incompatible inline type: '.get_class($inline));
         }
 
         return serialize(DeltaOp::text($inline->getContent(), ['code' => true]));

@@ -12,7 +12,7 @@ use League\CommonMark\Inline\Renderer\InlineRendererInterface;
 class TextRenderer implements InlineRendererInterface
 {
     /**
-     * @param AbstractInline $inline
+     * @param AbstractInline           $inline
      * @param ElementRendererInterface $quillRenderer
      *
      * @return string

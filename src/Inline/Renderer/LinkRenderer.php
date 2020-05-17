@@ -21,7 +21,7 @@ class LinkRenderer implements InlineRendererInterface, ConfigurationAwareInterfa
     protected $config;
 
     /**
-     * @param AbstractInline $inline
+     * @param AbstractInline           $inline
      * @param ElementRendererInterface $quillRenderer
      *
      * @return string
