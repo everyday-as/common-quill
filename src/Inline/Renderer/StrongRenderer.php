@@ -3,6 +3,7 @@
 namespace Everyday\CommonQuill\Inline\Renderer;
 
 use Everyday\QuillDelta\DeltaOp;
+use InvalidArgumentException;
 use League\CommonMark\ElementRendererInterface;
 use League\CommonMark\Inline\Element\AbstractInline;
 use League\CommonMark\Inline\Element\Strong;
@@ -11,21 +12,21 @@ use League\CommonMark\Inline\Renderer\InlineRendererInterface;
 class StrongRenderer implements InlineRendererInterface
 {
     /**
-     * @param Strong                              $inline
-     * @param \Everyday\CommonQuill\QuillRenderer $quillRenderer
+     * @param AbstractInline $inline
+     * @param ElementRendererInterface $quillRenderer
      *
-     * @return DeltaOp[]
+     * @return string
      */
     public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
     {
         if (!($inline instanceof Strong)) {
-            throw new \InvalidArgumentException('Incompatible inline type: '.get_class($inline));
+            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($inline));
         }
 
-        $ops = $quillRenderer->renderInlines($inline->children());
+        $ops = unserialize($quillRenderer->renderInlines($inline->children()));
 
         DeltaOp::applyAttributes($ops, ['bold' => true]);
 
-        return $ops;
+        return serialize($ops);
     }
 }

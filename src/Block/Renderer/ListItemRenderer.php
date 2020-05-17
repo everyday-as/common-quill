@@ -3,6 +3,7 @@
 namespace Everyday\CommonQuill\Block\Renderer;
 
 use Everyday\QuillDelta\DeltaOp;
+use InvalidArgumentException;
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Element\ListItem;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;
@@ -11,22 +12,22 @@ use League\CommonMark\ElementRendererInterface;
 class ListItemRenderer implements BlockRendererInterface
 {
     /**
-     * @param ListItem                            $block
-     * @param \Everyday\CommonQuill\QuillRenderer $quillRenderer
-     * @param bool                                $inTightList
+     * @param AbstractBlock $block
+     * @param ElementRendererInterface $quillRenderer
+     * @param bool $inTightList
      *
-     * @return DeltaOp[]
+     * @return string
      */
     public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
     {
         if (!($block instanceof ListItem)) {
-            throw new \InvalidArgumentException('Incompatible block type: '.get_class($block));
+            throw new InvalidArgumentException('Incompatible block type: '.get_class($block));
         }
 
         $ops = [];
         $contains_list = false;
 
-        foreach ($quillRenderer->renderBlocks($block->children(), true) as $op) {
+        foreach (unserialize($quillRenderer->renderBlocks($block->children(), true)) as $op) {
             if (!$op->isBlockModifier() && !$op->isEmbed()) {
                 // Strip new lines as quill only supports single-line list items
                 $op->setInsert(str_replace("\n", ' ', $op->getInsert()));
@@ -53,6 +54,6 @@ class ListItemRenderer implements BlockRendererInterface
             $ops[] = DeltaOp::blockModifier('list', strtolower($block->getListData()->type));
         }
 
-        return $ops;
+        return serialize($ops);
     }
 }

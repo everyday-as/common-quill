@@ -3,12 +3,14 @@
 namespace Everyday\CommonQuill\Block\Renderer;
 
 use Everyday\QuillDelta\Delta;
+use InvalidArgumentException;
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Element\Document;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;
 use League\CommonMark\ElementRendererInterface;
 use League\CommonMark\Util\Configuration;
 use League\CommonMark\Util\ConfigurationAwareInterface;
+use League\CommonMark\Util\ConfigurationInterface;
 
 class DocumentRenderer implements BlockRendererInterface, ConfigurationAwareInterface
 {
@@ -18,19 +20,19 @@ class DocumentRenderer implements BlockRendererInterface, ConfigurationAwareInte
     protected $config;
 
     /**
-     * @param AbstractBlock                       $block
-     * @param \Everyday\CommonQuill\QuillRenderer $quillRenderer
-     * @param bool                                $inTightList
+     * @param AbstractBlock $block
+     * @param ElementRendererInterface $quillRenderer
+     * @param bool $inTightList
      *
-     * @return Delta
+     * @return string
      */
     public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
     {
         if (!($block instanceof Document)) {
-            throw new \InvalidArgumentException('Incompatible block type: '.get_class($block));
+            throw new InvalidArgumentException('Incompatible block type: '.get_class($block));
         }
 
-        $ops = $quillRenderer->renderBlocks($block->children());
+        $ops = unserialize($quillRenderer->renderBlocks($block->children()));
 
         if (!empty($ops) && !$ops[0]->isEmbed() && !$ops[0]->isBlockModifier()) {
             $ops[0]->setInsert(ltrim($ops[0]->getInsert()));
@@ -38,17 +40,17 @@ class DocumentRenderer implements BlockRendererInterface, ConfigurationAwareInte
 
         $delta = new Delta($ops);
 
-        if ($this->config->getConfig('compact_delta')) {
+        if ($this->config->get('compact_delta')) {
             $delta->compact();
         }
 
-        return $delta;
+        return serialize($delta);
     }
 
     /**
-     * @param Configuration $configuration
+     * @param ConfigurationInterface $configuration
      */
-    public function setConfiguration(Configuration $configuration)
+    public function setConfiguration(ConfigurationInterface $configuration)
     {
         $this->config = $configuration;
     }

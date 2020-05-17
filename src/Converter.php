@@ -11,14 +11,14 @@ class Converter implements ConverterInterface
     /**
      * The document parser instance.
      *
-     * @var \League\CommonMark\DocParser
+     * @var DocParser
      */
     protected $docParser;
 
     /**
      * The html renderer instance.
      *
-     * @var \League\CommonMark\ElementRendererInterface
+     * @var ElementRendererInterface
      */
     protected $quillRenderer;
 
@@ -43,7 +43,7 @@ class Converter implements ConverterInterface
     {
         $documentAST = $this->docParser->parse($commonMark);
 
-        return $this->quillRenderer->renderBlock($documentAST);
+        return unserialize($this->quillRenderer->renderBlock($documentAST));
     }
 
     /**

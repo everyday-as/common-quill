@@ -1,7 +1,7 @@
 {
   "ops": [
     {
-      "insert": "<a href=\"https://www.google.com\"></a>"
+      "insert": "<a href=\"https://www.google.com\">Google</a>"
     },
     {
       "insert": "\n"

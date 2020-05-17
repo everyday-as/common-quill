@@ -2,7 +2,8 @@
 
 namespace Everyday\CommonQuill\Block\Renderer;
 
-use Everyday\QuillDelta\DeltaOp;
+use Everyday\HtmlToQuill\HtmlConverter;
+use InvalidArgumentException;
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Element\HtmlBlock;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;
@@ -11,18 +12,30 @@ use League\CommonMark\ElementRendererInterface;
 class HtmlBlockRenderer implements BlockRendererInterface
 {
     /**
-     * @param HtmlBlock                           $block
-     * @param \Everyday\CommonQuill\QuillRenderer $quillRenderer
-     * @param bool                                $inTightList
+     * @var HtmlConverter
+     */
+    protected $converter;
+
+    public function __construct()
+    {
+        $this->converter = new HtmlConverter();
+    }
+
+    /**
+     * @param AbstractBlock $block
+     * @param ElementRendererInterface $quillRenderer
+     * @param bool $inTightList
      *
-     * @return DeltaOp
+     * @return string
      */
     public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
     {
         if (!($block instanceof HtmlBlock)) {
-            throw new \InvalidArgumentException('Incompatible block type: '.get_class($block));
+            throw new InvalidArgumentException('Incompatible block type: ' . get_class($block));
         }
 
-        return DeltaOp::text($block->getStringContent());
+        $delta = $this->converter->convert($block->getStringContent());
+
+        return serialize($delta->getOps());
     }
 }

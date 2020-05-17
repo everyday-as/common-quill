@@ -3,6 +3,7 @@
 namespace Everyday\CommonQuill\Block\Renderer;
 
 use Everyday\QuillDelta\DeltaOp;
+use InvalidArgumentException;
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Element\BlockQuote;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;
@@ -11,23 +12,23 @@ use League\CommonMark\ElementRendererInterface;
 class BlockQuoteRenderer implements BlockRendererInterface
 {
     /**
-     * @param BlockQuote                          $block
-     * @param \Everyday\CommonQuill\QuillRenderer $quillRenderer
-     * @param bool                                $inTightList
+     * @param AbstractBlock $block
+     * @param ElementRendererInterface $quillRenderer
+     * @param bool $inTightList
      *
-     * @return DeltaOp[]
+     * @return string
      */
     public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
     {
         if (!($block instanceof BlockQuote)) {
-            throw new \InvalidArgumentException('Incompatible block type: '.get_class($block));
+            throw new InvalidArgumentException('Incompatible block type: ' . get_class($block));
         }
 
         $ops = [];
 
         // Filter ops as quill has limited support for block quotes
         /** @var DeltaOp $op */
-        foreach ($quillRenderer->renderBlocks($block->children()) as $op) {
+        foreach (unserialize($quillRenderer->renderBlocks($block->children())) as $op) {
             if (!$op->isEmbed()) {
                 // Strip new lines as quill only supports single-line block quotes
                 $op->setInsert(str_replace("\n", ' ', trim($op->getInsert())));
@@ -45,6 +46,6 @@ class BlockQuoteRenderer implements BlockRendererInterface
             $ops[] = DeltaOp::blockModifier('blockquote');
         }
 
-        return $ops;
+        return serialize($ops);
     }
 }
