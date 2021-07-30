@@ -1,0 +1,10 @@
+{
+  "ops": [
+    {
+      "insert": "<?php $myVariable = 'test';"
+    },
+    {
+      "insert": "\n"
+    }
+  ]
+}
