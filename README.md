@@ -25,7 +25,7 @@ use Everyday\CommonQuill\QuillConverter;
 $converter = new QuillConverter();
 echo json_encode($converter->convertToQuill('# Hello World!'));
 
-// {"ops":[{"insert":"Hello World!"},{"insert":"\n",attributes":{"header":1}}]}
+// {"ops":[{"insert":"Hello World!"},{"insert":"\n","attributes":{"header":1}}]}
 ```
 
 ## Advanced Usage & Customization
