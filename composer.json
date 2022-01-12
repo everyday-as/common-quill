@@ -13,8 +13,9 @@
     }
   ],
   "require": {
-    "league/commonmark": "^1.3",
+    "php": ">=8.0",
     "ext-json": "*",
+    "league/commonmark": "^1.3",
     "mikehaertl/php-shellcommand": "^1.4",
     "symfony/finder": "^4.2|^5.0",
     "everyday/php-quill-delta": "^0.1",
