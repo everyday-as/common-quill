@@ -1,6 +1,6 @@
 # everyday/commonquill
 
-[![Build Status](https://travis-ci.org/Everyday-AS/common-quill.svg?branch=master)](https://travis-ci.org/Everyday-AS/common-quill)
+![Tests](https://github.com/everyday-as/common-quill/actions/workflows/test.yml/badge.svg?branch=master)
 [![StyleCI](https://github.styleci.io/repos/172658588/shield?branch=master)](https://github.styleci.io/repos/172658588)
 [![codecov](https://codecov.io/gh/Everyday-AS/common-quill/branch/master/graph/badge.svg)](https://codecov.io/gh/Everyday-AS/common-quill)
 
@@ -26,7 +26,7 @@ use Everyday\CommonQuill\QuillConverter;
 $converter = new QuillConverter();
 echo json_encode($converter->convertToQuill('# Hello World!'));
 
-// {"ops":[{"insert":"Hello World!"},{"insert":"\n",attributes":{"header":1}}]}
+// {"ops":[{"insert":"Hello World!"},{"insert":"\n","attributes":{"header":1}}]}
 ```
 
 ## Advanced Usage & Customization

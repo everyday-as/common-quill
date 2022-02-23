@@ -22,9 +22,12 @@
     "ext-json": "*",
     "league/commonmark": "^2.2",
     "mikehaertl/php-shellcommand": "^1.4",
-    "symfony/finder": "^4.2|^5.0",
     "everyday/php-quill-delta": "^0.1",
-    "everyday/html-to-quill": "^0.1"
+    "everyday/html-to-quill": "^0.4"
+  },
+  "require-dev": {
+    "pestphp/pest": "^1.21",
+    "symfony/finder": "^6.0"
   },
   "autoload": {
     "psr-4": {
@@ -37,9 +40,6 @@
   "bin": [
     "bin/commonquill"
   ],
-  "require-dev": {
-    "pestphp/pest": "^1.21"
-  },
   "config": {
     "allow-plugins": {
       "pestphp/pest-plugin": true
