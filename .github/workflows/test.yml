@@ -32,10 +32,9 @@ jobs:
         run: composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
 
       - name: Unit Tests
-        run: ./vendor/bin/pest --colors=always --coverage --coverage-xml=./coverage
+        run: ./vendor/bin/pest --colors=always --coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
           env_vars: OS,PHP
-          directory: ./coverage
