@@ -13,6 +13,7 @@ jobs:
     env:
       OS: ${{ matrix.os }}
       PHP: ${{ matrix.php }}
+      DEPENDENCY_VERSION: ${{ matrix.dependency-version }}
 
     name: PHP ${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
 
@@ -37,4 +38,4 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
-          env_vars: OS,PHP
+          env_vars: OS,PHP,DEPENDENCY_VERSION
