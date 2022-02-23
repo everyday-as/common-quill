@@ -4,30 +4,27 @@ namespace Everyday\CommonQuill\Block\Renderer;
 
 use Everyday\QuillDelta\DeltaOp;
 use InvalidArgumentException;
-use League\CommonMark\Block\Element\AbstractBlock;
-use League\CommonMark\Block\Element\Heading;
-use League\CommonMark\Block\Renderer\BlockRendererInterface;
-use League\CommonMark\ElementRendererInterface;
+use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 
-class HeadingRenderer implements BlockRendererInterface
+class HeadingRenderer implements NodeRendererInterface
 {
-    /**
-     * @param AbstractBlock            $block
-     * @param ElementRendererInterface $quillRenderer
-     * @param bool                     $inTightList
-     *
-     * @return string
-     */
-    public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($block instanceof Heading)) {
-            throw new InvalidArgumentException('Incompatible block type: '.get_class($block));
+        if (!($node instanceof Heading)) {
+            throw new InvalidArgumentException('Incompatible block type: ' . get_class($node));
         }
+
+        $ops = unserialize($childRenderer->renderNodes($node->children()), [
+            'allowed_classes' => [DeltaOp::class]
+        ]);
 
         return serialize(array_merge(
             [DeltaOp::text("\n")],
-            unserialize($quillRenderer->renderInlines($block->children())),
-            [DeltaOp::blockModifier('header', $block->getLevel())]
+            $ops,
+            [DeltaOp::blockModifier('header', $node->getLevel())]
         ));
     }
 }

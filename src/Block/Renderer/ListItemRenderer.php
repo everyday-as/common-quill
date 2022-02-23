@@ -4,30 +4,27 @@ namespace Everyday\CommonQuill\Block\Renderer;
 
 use Everyday\QuillDelta\DeltaOp;
 use InvalidArgumentException;
-use League\CommonMark\Block\Element\AbstractBlock;
-use League\CommonMark\Block\Element\ListItem;
-use League\CommonMark\Block\Renderer\BlockRendererInterface;
-use League\CommonMark\ElementRendererInterface;
+use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 
-class ListItemRenderer implements BlockRendererInterface
+class ListItemRenderer implements NodeRendererInterface
 {
-    /**
-     * @param AbstractBlock            $block
-     * @param ElementRendererInterface $quillRenderer
-     * @param bool                     $inTightList
-     *
-     * @return string
-     */
-    public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($block instanceof ListItem)) {
-            throw new InvalidArgumentException('Incompatible block type: '.get_class($block));
+        if (!($node instanceof ListItem)) {
+            throw new InvalidArgumentException('Incompatible block type: ' . get_class($node));
         }
 
         $ops = [];
-        $contains_list = false;
+        $containsList = false;
 
-        foreach (unserialize($quillRenderer->renderBlocks($block->children(), true)) as $op) {
+        $childOps = unserialize($childRenderer->renderNodes($node->children()), [
+            'allowed_classes' => [DeltaOp::class]
+        ]);
+
+        foreach ($childOps as $op) {
             if (!$op->isBlockModifier() && !$op->isEmbed()) {
                 // Strip new lines as quill only supports single-line list items
                 $op->setInsert(str_replace("\n", ' ', $op->getInsert()));
@@ -37,7 +34,7 @@ class ListItemRenderer implements BlockRendererInterface
             $op->removeAttributes('blockquote', 'header', 'code-block');
 
             if ($op->hasAttribute('list')) {
-                $contains_list = true;
+                $containsList = true;
             } else {
                 $op->removeAttributes('indent');
             }
@@ -50,8 +47,8 @@ class ListItemRenderer implements BlockRendererInterface
         }
 
         // TODO: Currently the child list will render the delta for this `ListItem`, this is not ideal.
-        if (!$contains_list) {
-            $ops[] = DeltaOp::blockModifier('list', strtolower($block->getListData()->type));
+        if (!$containsList) {
+            $ops[] = DeltaOp::blockModifier('list', strtolower($node->getListData()->type));
         }
 
         return serialize($ops);

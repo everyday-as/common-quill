@@ -2,30 +2,32 @@
 
 namespace Everyday\CommonQuill\Block\Renderer;
 
+use Everyday\CommonQuill\Concerns\InTightList;
+use Everyday\CommonQuill\QuillRenderer;
 use Everyday\QuillDelta\DeltaOp;
 use InvalidArgumentException;
-use League\CommonMark\Block\Element\AbstractBlock;
-use League\CommonMark\Block\Element\ListBlock;
-use League\CommonMark\Block\Renderer\BlockRendererInterface;
-use League\CommonMark\ElementRendererInterface;
+use League\CommonMark\Extension\CommonMark\Node\Block\ListBlock;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 
-class ListBlockRenderer implements BlockRendererInterface
+class ListBlockRenderer implements NodeRendererInterface
 {
+    use InTightList;
+
     /**
-     * @param AbstractBlock            $block
-     * @param ElementRendererInterface $quillRenderer
-     * @param bool                     $inTightList
-     *
-     * @return string
+     * @param QuillRenderer $childRenderer
      */
-    public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($block instanceof ListBlock)) {
-            throw new InvalidArgumentException('Incompatible block type: '.get_class($block));
+        if (!($node instanceof ListBlock)) {
+            throw new InvalidArgumentException('Incompatible block type: ' . get_class($node));
         }
 
         // All lists are tight
-        $ops = unserialize($quillRenderer->renderBlocks($block->children(), true));
+        $ops = unserialize($childRenderer->renderNodes($node->children()), [
+            'allowed_classes' => [DeltaOp::class]
+        ]);
 
         foreach ($ops as $op) {
             if ($op->hasAttribute('list')) {
@@ -33,8 +35,8 @@ class ListBlockRenderer implements BlockRendererInterface
             }
         }
 
-        if ($inTightList) {
-            $parent = $block->parent();
+        if ($this->inTightList($node)) {
+            $parent = $node->parent();
 
             while (!($parent instanceof ListBlock)) {
                 $parent = $parent->parent();

@@ -2,31 +2,29 @@
 
 namespace Everyday\CommonQuill\Block\Renderer;
 
+use Everyday\CommonQuill\Concerns\InTightList;
 use Everyday\QuillDelta\DeltaOp;
 use InvalidArgumentException;
-use League\CommonMark\Block\Element\AbstractBlock;
-use League\CommonMark\Block\Element\Paragraph;
-use League\CommonMark\Block\Renderer\BlockRendererInterface;
-use League\CommonMark\ElementRendererInterface;
+use League\CommonMark\Node\Block\Paragraph;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 
-class ParagraphRenderer implements BlockRendererInterface
+class ParagraphRenderer implements NodeRendererInterface
 {
-    /**
-     * @param AbstractBlock            $block
-     * @param ElementRendererInterface $quillRenderer
-     * @param bool                     $inTightList
-     *
-     * @return string
-     */
-    public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
+    use InTightList;
+
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($block instanceof Paragraph)) {
-            throw new InvalidArgumentException('Incompatible block type: '.get_class($block));
+        if (!($node instanceof Paragraph)) {
+            throw new InvalidArgumentException('Incompatible block type: ' . get_class($node));
         }
 
-        $ops = unserialize($quillRenderer->renderInlines($block->children()));
+        $ops = unserialize($childRenderer->renderNodes($node->children()), [
+            'allowed_classes' => [DeltaOp::class]
+        ]);
 
-        if (!$inTightList) {
+        if (!$this->inTightList($node)) {
             $ops[] = DeltaOp::text("\n");
         }
 

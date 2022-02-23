@@ -4,26 +4,22 @@ namespace Everyday\CommonQuill\Inline\Renderer;
 
 use Everyday\QuillDelta\DeltaOp;
 use InvalidArgumentException;
-use League\CommonMark\ElementRendererInterface;
-use League\CommonMark\Inline\Element\AbstractInline;
-use League\CommonMark\Inline\Element\Strong;
-use League\CommonMark\Inline\Renderer\InlineRendererInterface;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 
-class StrongRenderer implements InlineRendererInterface
+class StrongRenderer implements NodeRendererInterface
 {
-    /**
-     * @param AbstractInline           $inline
-     * @param ElementRendererInterface $quillRenderer
-     *
-     * @return string
-     */
-    public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($inline instanceof Strong)) {
-            throw new InvalidArgumentException('Incompatible inline type: '.get_class($inline));
+        if (!($node instanceof Strong)) {
+            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));
         }
 
-        $ops = unserialize($quillRenderer->renderInlines($inline->children()));
+        $ops = unserialize($childRenderer->renderNodes($node->children()), [
+            'allowed_classes' => [DeltaOp::class]
+        ]);
 
         DeltaOp::applyAttributes($ops, ['bold' => true]);
 

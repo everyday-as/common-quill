@@ -15,5 +15,5 @@ interface ConverterInterface
      *
      * @api
      */
-    public function convertToQuill($commonMark);
+    public function convertToQuill(string $commonMark): Delta;
 }

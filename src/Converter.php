@@ -3,35 +3,16 @@
 namespace Everyday\CommonQuill;
 
 use Everyday\QuillDelta\Delta;
-use League\CommonMark\DocParser;
-use League\CommonMark\ElementRendererInterface;
+use Everyday\QuillDelta\DeltaOp;
+use League\CommonMark\Parser\MarkdownParserInterface;
 
 class Converter implements ConverterInterface
 {
     /**
-     * The document parser instance.
-     *
-     * @var DocParser
-     */
-    protected $docParser;
-
-    /**
-     * The html renderer instance.
-     *
-     * @var ElementRendererInterface
-     */
-    protected $quillRenderer;
-
-    /**
      * Create a new commonmark converter instance.
-     *
-     * @param DocParser                $docParser
-     * @param ElementRendererInterface $quillRenderer
      */
-    public function __construct(DocParser $docParser, ElementRendererInterface $quillRenderer)
+    public function __construct(protected MarkdownParserInterface $markdownParser, protected QuillRenderer $quillRenderer)
     {
-        $this->docParser = $docParser;
-        $this->quillRenderer = $quillRenderer;
     }
 
     /**
@@ -39,23 +20,29 @@ class Converter implements ConverterInterface
      *
      * @return Delta
      */
-    public function convertToQuill($commonMark)
+    public function convertToQuill(string $commonMark): Delta
     {
-        $documentAST = $this->docParser->parse($commonMark);
+        $document = $this->markdownParser->parse($commonMark);
 
-        return unserialize($this->quillRenderer->renderBlock($documentAST));
+        $delta = new Delta(unserialize($this->quillRenderer->renderDocument($document)->getContent(), [
+            'allowed_classes' => [DeltaOp::class]
+        ]));
+
+        $delta->compact();
+
+        return $delta;
     }
 
     /**
      * Converts CommonMark to Quill delta.
      *
-     * @see Converter::convertToQuill
-     *
      * @param string $commonMark
      *
-     * @return string
+     * @return Delta
+     * @see Converter::convertToQuill
+     *
      */
-    public function __invoke($commonMark)
+    public function __invoke(string $commonMark): Delta
     {
         return $this->convertToQuill($commonMark);
     }

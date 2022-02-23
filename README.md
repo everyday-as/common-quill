@@ -4,8 +4,9 @@
 [![StyleCI](https://github.styleci.io/repos/172658588/shield?branch=master)](https://github.styleci.io/repos/172658588)
 [![codecov](https://codecov.io/gh/Everyday-AS/common-quill/branch/master/graph/badge.svg)](https://codecov.io/gh/Everyday-AS/common-quill)
 
-
-**everyday/commonquill** is a PHP-based Markdown to Quill parser created by [Everyday](https://everyday.no) which supports the full [CommonMark] spec. **everyday/commonquill** depends on [league/commonmark](https://github.com/thephpleague/commonmark/)'s brilliant AST implementation.
+**everyday/commonquill** is a PHP-based Markdown to Quill parser created by [Everyday](https://everyday.no) which
+supports the full [CommonMark] spec. **everyday/commonquill** depends
+on [league/commonmark](https://github.com/thephpleague/commonmark/)'s brilliant AST implementation.
 
 ## Installation
 
@@ -30,4 +31,5 @@ echo json_encode($converter->convertToQuill('# Hello World!'));
 
 ## Advanced Usage & Customization
 
-Please refer to [thephpleague/commonmark](https://github.com/thephpleague/commonmark/blob/master/README.md)'s docs for more information.
+Please refer to [thephpleague/commonmark](https://github.com/thephpleague/commonmark/blob/master/README.md)'s docs for
+more information.

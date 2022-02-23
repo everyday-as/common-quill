@@ -2,113 +2,62 @@
 
 namespace Everyday\CommonQuill;
 
+use Everyday\CommonQuill\Exceptions\RuntimeException;
+use Everyday\QuillDelta\DeltaOp;
+use League\CommonMark\Environment\EnvironmentInterface;
+use League\CommonMark\Node\Block\Document;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Output\RenderedContent;
+use League\CommonMark\Output\RenderedContentInterface;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\MarkdownRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 use function get_class;
-use League\CommonMark\Block\Element\AbstractBlock;
-use League\CommonMark\Block\Renderer\BlockRendererInterface;
-use League\CommonMark\ElementRendererInterface;
-use League\CommonMark\EnvironmentInterface;
-use League\CommonMark\Inline\Element\AbstractInline;
-use League\CommonMark\Inline\Renderer\InlineRendererInterface;
-use RuntimeException;
 
-class QuillRenderer implements ElementRendererInterface
+class QuillRenderer implements MarkdownRendererInterface, ChildNodeRendererInterface
 {
-    /**
-     * @var EnvironmentInterface
-     */
-    protected $environment;
-
-    /**
-     * @param EnvironmentInterface $environment
-     */
-    public function __construct(EnvironmentInterface $environment)
+    public function __construct(protected EnvironmentInterface $environment)
     {
-        $this->environment = $environment;
     }
 
-    /**
-     * @param string $option
-     * @param mixed  $default
-     *
-     * @return mixed
-     */
-    public function getOption($option, $default = null)
+    public function renderDocument(Document $document): RenderedContentInterface
     {
-        return $this->environment->getConfig('renderer/'.$option, $default);
+        return new RenderedContent($document, $this->renderNode($document));
     }
 
-    /**
-     * @param AbstractInline $inline
-     *
-     * @throws RuntimeException
-     *
-     * @return string
-     */
-    public function renderInline(AbstractInline $inline): string
-    {
-        $renderers = $this->environment->getInlineRenderersForClass(get_class($inline));
-
-        /** @var InlineRendererInterface $renderer */
-        foreach ($renderers as $renderer) {
-            if (($result = $renderer->render($inline, $this)) !== null) {
-                return $result;
-            }
-        }
-
-        throw new RuntimeException('Unable to find corresponding renderer for inline type '.get_class($inline));
-    }
-
-    /**
-     * @param AbstractInline[] $inlines
-     *
-     * @return string
-     */
-    public function renderInlines(iterable $inlines): string
+    public function renderNodes(iterable $nodes): string
     {
         $result = [];
-
-        foreach ($inlines as $inline) {
-            $result[] = unserialize($this->renderInline($inline));
+        foreach ($nodes as $node) {
+            $result[] = unserialize($this->renderNode($node), [
+                'allowed_classes' => [DeltaOp::class]
+            ]);
         }
 
         return serialize(array_flatten($result));
     }
 
-    /**
-     * @param AbstractBlock $block
-     * @param bool          $inTightList
-     *
-     * @throws RuntimeException
-     *
-     * @return string
-     */
-    public function renderBlock(AbstractBlock $block, $inTightList = false): string
+    public function renderNode(Node $node)
     {
-        $renderers = $this->environment->getBlockRenderersForClass(get_class($block));
+        $renderers = $this->environment->getRenderersForClass(get_class($node));
 
-        /** @var BlockRendererInterface $renderer */
         foreach ($renderers as $renderer) {
-            if (($result = $renderer->render($block, $this, $inTightList)) !== null) {
+            assert($renderer instanceof NodeRendererInterface);
+            if (($result = $renderer->render($node, $this)) !== null) {
                 return $result;
             }
         }
 
-        throw new RuntimeException('Unable to find corresponding renderer for block type '.get_class($block));
+        throw new RuntimeException('Unable to find corresponding renderer for node type: ' . get_class($node));
     }
 
-    /**
-     * @param AbstractBlock[] $blocks
-     * @param bool            $inTightList
-     *
-     * @return string
-     */
-    public function renderBlocks($blocks, $inTightList = false): string
+    public function getBlockSeparator(): string
     {
-        $result = [];
-        foreach ($blocks as $block) {
-            $result[] = unserialize($this->renderBlock($block, $inTightList));
-        }
+        return '';
+    }
 
-        return serialize(array_flatten($result));
+    public function getInnerSeparator(): string
+    {
+        return '';
     }
 }

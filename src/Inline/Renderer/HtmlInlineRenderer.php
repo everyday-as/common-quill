@@ -4,40 +4,28 @@ namespace Everyday\CommonQuill\Inline\Renderer;
 
 use Everyday\HtmlToQuill\HtmlConverter;
 use Everyday\QuillDelta\DeltaOp;
-use Exception;
 use InvalidArgumentException;
-use League\CommonMark\ElementRendererInterface;
-use League\CommonMark\Inline\Element\AbstractInline;
-use League\CommonMark\Inline\Element\HtmlInline;
-use League\CommonMark\Inline\Renderer\InlineRendererInterface;
+use League\CommonMark\Extension\CommonMark\Node\Inline\HtmlInline;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 
-class HtmlInlineRenderer implements InlineRendererInterface
+class HtmlInlineRenderer implements NodeRendererInterface
 {
-    /**
-     * @var HtmlConverter
-     */
-    protected $converter;
+    protected HtmlConverter $converter;
 
     public function __construct()
     {
         $this->converter = new HtmlConverter();
     }
 
-    /**
-     * @param AbstractInline           $inline
-     * @param ElementRendererInterface $quillRenderer
-     *
-     * @throws Exception
-     *
-     * @return string
-     */
-    public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($inline instanceof HtmlInline)) {
-            throw new InvalidArgumentException('Incompatible inline type: '.get_class($inline));
+        if (!($node instanceof HtmlInline)) {
+            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));
         }
 
         // TODO: Render the HTML inline to a Quill delta
-        return serialize(DeltaOp::text($inline->getContent()));
+        return serialize(DeltaOp::text($node->getLiteral()));
     }
 }

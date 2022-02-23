@@ -21,7 +21,7 @@ foreach ($argv as $i => $arg) {
         continue;
     }
 
-    if (substr($arg, 0, 1) === '-') {
+    if (str_starts_with($arg, '-')) {
         switch ($arg) {
             case '-h':
             case '--help':
@@ -46,7 +46,7 @@ if (isset($src)) {
 
     $markdown = file_get_contents($src);
 } else {
-    $stdin = fopen('php://stdin', 'r');
+    $stdin = fopen('php://stdin', 'rb');
 
     if (stream_set_blocking($stdin, false)) {
         $markdown = stream_get_contents($stdin);
@@ -66,9 +66,9 @@ echo json_encode($converter->convertToQuill($markdown));
  *
  * @return string
  */
-function getHelpText()
+function getHelpText(): string
 {
-    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+    if (stripos(PHP_OS_FAMILY, 'WIN') === 0) {
         return <<<WINDOWSHELP
 CommonQuill - Markdown to Quill conversions done right
 

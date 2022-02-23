@@ -4,26 +4,20 @@ namespace Everyday\CommonQuill\Inline\Renderer;
 
 use Everyday\QuillDelta\DeltaOp;
 use InvalidArgumentException;
-use League\CommonMark\ElementRendererInterface;
-use League\CommonMark\Inline\Element\AbstractInline;
-use League\CommonMark\Inline\Element\Newline;
-use League\CommonMark\Inline\Renderer\InlineRendererInterface;
+use League\CommonMark\Node\Inline\Newline;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 
-class NewlineRenderer implements InlineRendererInterface
+class NewlineRenderer implements NodeRendererInterface
 {
-    /**
-     * @param AbstractInline           $inline
-     * @param ElementRendererInterface $quillRenderer
-     *
-     * @return string
-     */
-    public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($inline instanceof Newline)) {
-            throw new InvalidArgumentException('Incompatible inline type: '.get_class($inline));
+        if (!($node instanceof Newline)) {
+            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));
         }
 
-        if (Newline::HARDBREAK === $inline->getType()) {
+        if (Newline::HARDBREAK === $node->getType()) {
             return serialize(DeltaOp::text("\n"));
         }
 

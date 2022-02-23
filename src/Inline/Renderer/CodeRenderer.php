@@ -4,25 +4,19 @@ namespace Everyday\CommonQuill\Inline\Renderer;
 
 use Everyday\QuillDelta\DeltaOp;
 use InvalidArgumentException;
-use League\CommonMark\ElementRendererInterface;
-use League\CommonMark\Inline\Element\AbstractInline;
-use League\CommonMark\Inline\Element\Code;
-use League\CommonMark\Inline\Renderer\InlineRendererInterface;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 
-class CodeRenderer implements InlineRendererInterface
+class CodeRenderer implements NodeRendererInterface
 {
-    /**
-     * @param AbstractInline           $inline
-     * @param ElementRendererInterface $quillRenderer
-     *
-     * @return string
-     */
-    public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($inline instanceof Code)) {
-            throw new InvalidArgumentException('Incompatible inline type: '.get_class($inline));
+        if (!($node instanceof Code)) {
+            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));
         }
 
-        return serialize(DeltaOp::text($inline->getContent(), ['code' => true]));
+        return serialize(DeltaOp::text($node->getLiteral(), ['code' => true]));
     }
 }

@@ -4,26 +4,19 @@ namespace Everyday\CommonQuill\Block\Renderer;
 
 use Everyday\QuillDelta\DeltaOp;
 use InvalidArgumentException;
-use League\CommonMark\Block\Element\AbstractBlock;
-use League\CommonMark\Block\Element\FencedCode;
-use League\CommonMark\Block\Renderer\BlockRendererInterface;
-use League\CommonMark\ElementRendererInterface;
+use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 
-class FencedCodeRenderer implements BlockRendererInterface
+class FencedCodeRenderer implements NodeRendererInterface
 {
-    /**
-     * @param AbstractBlock            $block
-     * @param ElementRendererInterface $quillRenderer
-     * @param bool                     $inTightList
-     *
-     * @return string
-     */
-    public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($block instanceof FencedCode)) {
-            throw new InvalidArgumentException('Incompatible block type: '.get_class($block));
+        if (!($node instanceof FencedCode)) {
+            throw new InvalidArgumentException('Incompatible block type: ' . get_class($node));
         }
 
-        return serialize(DeltaOp::text($block->getStringContent(), ['code-block' => true]));
+        return serialize(DeltaOp::text($node->getLiteral(), ['code-block' => true]));
     }
 }

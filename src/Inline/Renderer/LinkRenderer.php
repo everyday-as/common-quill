@@ -4,53 +4,42 @@ namespace Everyday\CommonQuill\Inline\Renderer;
 
 use Everyday\QuillDelta\DeltaOp;
 use InvalidArgumentException;
-use League\CommonMark\ElementRendererInterface;
-use League\CommonMark\Inline\Element\AbstractInline;
-use League\CommonMark\Inline\Element\Link;
-use League\CommonMark\Inline\Renderer\InlineRendererInterface;
-use League\CommonMark\Util\Configuration;
-use League\CommonMark\Util\ConfigurationAwareInterface;
-use League\CommonMark\Util\ConfigurationInterface;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 use League\CommonMark\Util\RegexHelper;
+use League\Config\ConfigurationAwareInterface;
+use League\Config\ConfigurationInterface;
 
-class LinkRenderer implements InlineRendererInterface, ConfigurationAwareInterface
+class LinkRenderer implements NodeRendererInterface, ConfigurationAwareInterface
 {
-    /**
-     * @var Configuration
-     */
-    protected $config;
+    protected ConfigurationInterface $config;
 
-    /**
-     * @param AbstractInline           $inline
-     * @param ElementRendererInterface $quillRenderer
-     *
-     * @return string
-     */
-    public function render(AbstractInline $inline, ElementRendererInterface $quillRenderer)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($inline instanceof Link)) {
-            throw new InvalidArgumentException('Incompatible inline type: '.get_class($inline));
+        if (!($node instanceof Link)) {
+            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));
         }
 
-        $target = $inline->data['attributes']['target'] ?? null;
+        $target = $node->data['attributes']['target'] ?? null;
 
-        $link = $inline->getUrl();
+        $link = $node->getUrl();
         if (!$this->config->get('allow_unsafe_links') && RegexHelper::isLinkPotentiallyUnsafe($link)) {
             $link = 'about:blank';
         }
 
         /** @var DeltaOp[] $ops */
-        $ops = unserialize($quillRenderer->renderInlines($inline->children()));
+        $ops = unserialize($childRenderer->renderNodes($node->children()), [
+            'allowed_classes' => [DeltaOp::class]
+        ]);
 
         DeltaOp::applyAttributes($ops, compact('link', 'target'));
 
         return serialize($ops);
     }
 
-    /**
-     * @param ConfigurationInterface $configuration
-     */
-    public function setConfiguration(ConfigurationInterface $configuration)
+    public function setConfiguration(ConfigurationInterface $configuration): void
     {
         $this->config = $configuration;
     }

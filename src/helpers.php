@@ -2,16 +2,11 @@
 
 namespace Everyday\CommonQuill;
 
-function array_flatten($array)
+function array_flatten(array $array): array
 {
-    if (!is_array($array)) {
-        return [$array];
-    }
+    array_walk_recursive($array, static function ($item) use (&$out) {
+        $out[] = $item;
+    });
 
-    $result = [];
-    foreach ($array as $value) {
-        $result = array_merge($result, array_flatten($value));
-    }
-
-    return $result;
+    return $out;
 }

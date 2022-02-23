@@ -7,7 +7,7 @@ class BinTest extends AbstractBinTest
     /**
      * Tests the behavior of not providing any Markdown input.
      */
-    public function testNoArgsOrStdin()
+    public function testNoArgsOrStdin(): void
     {
         $cmd = $this->createCommand();
         $cmd->execute();
@@ -23,7 +23,7 @@ class BinTest extends AbstractBinTest
     /**
      * Tests the -h flag.
      */
-    public function testHelpShortFlag()
+    public function testHelpShortFlag(): void
     {
         $cmd = $this->createCommand();
         $cmd->addArg('-h');
@@ -36,7 +36,7 @@ class BinTest extends AbstractBinTest
     /**
      * Tests the --help option.
      */
-    public function testHelpOption()
+    public function testHelpOption(): void
     {
         $cmd = $this->createCommand();
         $cmd->addArg('--help');
@@ -49,7 +49,7 @@ class BinTest extends AbstractBinTest
     /**
      * Tests the behavior of using unknown options.
      */
-    public function testUnknownOption()
+    public function testUnknownOption(): void
     {
         $cmd = $this->createCommand();
         $cmd->addArg('--foo');
@@ -69,8 +69,8 @@ class BinTest extends AbstractBinTest
      *
      * @return string
      */
-    protected function getPathToData($file)
+    protected function getPathToData(string $file): string
     {
-        return realpath(__DIR__.'/data/'.$file);
+        return realpath(__DIR__ . '/data/' . $file);
     }
 }

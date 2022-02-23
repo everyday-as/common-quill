@@ -4,37 +4,27 @@ namespace Everyday\CommonQuill\Block\Renderer;
 
 use Everyday\HtmlToQuill\HtmlConverter;
 use InvalidArgumentException;
-use League\CommonMark\Block\Element\AbstractBlock;
-use League\CommonMark\Block\Element\HtmlBlock;
-use League\CommonMark\Block\Renderer\BlockRendererInterface;
-use League\CommonMark\ElementRendererInterface;
+use League\CommonMark\Extension\CommonMark\Node\Block\HtmlBlock;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 
-class HtmlBlockRenderer implements BlockRendererInterface
+class HtmlBlockRenderer implements NodeRendererInterface
 {
-    /**
-     * @var HtmlConverter
-     */
-    protected $converter;
+    protected HtmlConverter $converter;
 
     public function __construct()
     {
         $this->converter = new HtmlConverter();
     }
 
-    /**
-     * @param AbstractBlock            $block
-     * @param ElementRendererInterface $quillRenderer
-     * @param bool                     $inTightList
-     *
-     * @return string
-     */
-    public function render(AbstractBlock $block, ElementRendererInterface $quillRenderer, $inTightList = false)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($block instanceof HtmlBlock)) {
-            throw new InvalidArgumentException('Incompatible block type: '.get_class($block));
+        if (!($node instanceof HtmlBlock)) {
+            throw new InvalidArgumentException('Incompatible block type: ' . get_class($node));
         }
 
-        $delta = $this->converter->convert($block->getStringContent());
+        $delta = $this->converter->convert($node->getLiteral());
 
         return serialize($delta->getOps());
     }
