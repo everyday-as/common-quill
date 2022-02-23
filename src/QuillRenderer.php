@@ -4,6 +4,7 @@ namespace Everyday\CommonQuill;
 
 use Everyday\CommonQuill\Exceptions\RuntimeException;
 use Everyday\QuillDelta\DeltaOp;
+use function get_class;
 use League\CommonMark\Environment\EnvironmentInterface;
 use League\CommonMark\Node\Block\Document;
 use League\CommonMark\Node\Node;
@@ -12,7 +13,6 @@ use League\CommonMark\Output\RenderedContentInterface;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\MarkdownRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
-use function get_class;
 
 class QuillRenderer implements MarkdownRendererInterface, ChildNodeRendererInterface
 {
@@ -30,7 +30,7 @@ class QuillRenderer implements MarkdownRendererInterface, ChildNodeRendererInter
         $result = [];
         foreach ($nodes as $node) {
             $result[] = unserialize($this->renderNode($node), [
-                'allowed_classes' => [DeltaOp::class]
+                'allowed_classes' => [DeltaOp::class],
             ]);
         }
 
@@ -48,7 +48,7 @@ class QuillRenderer implements MarkdownRendererInterface, ChildNodeRendererInter
             }
         }
 
-        throw new RuntimeException('Unable to find corresponding renderer for node type: ' . get_class($node));
+        throw new RuntimeException('Unable to find corresponding renderer for node type: '.get_class($node));
     }
 
     public function getBlockSeparator(): string

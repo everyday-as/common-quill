@@ -14,14 +14,14 @@ class ListItemRenderer implements NodeRendererInterface
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
         if (!($node instanceof ListItem)) {
-            throw new InvalidArgumentException('Incompatible block type: ' . get_class($node));
+            throw new InvalidArgumentException('Incompatible block type: '.get_class($node));
         }
 
         $ops = [];
         $containsList = false;
 
         $childOps = unserialize($childRenderer->renderNodes($node->children()), [
-            'allowed_classes' => [DeltaOp::class]
+            'allowed_classes' => [DeltaOp::class],
         ]);
 
         foreach ($childOps as $op) {

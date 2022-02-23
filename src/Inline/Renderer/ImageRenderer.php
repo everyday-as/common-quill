@@ -20,7 +20,7 @@ class ImageRenderer implements NodeRendererInterface, ConfigurationAwareInterfac
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
         if (!($node instanceof Image)) {
-            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));
+            throw new InvalidArgumentException('Incompatible inline type: '.get_class($node));
         }
 
         $src = $node->getUrl();
