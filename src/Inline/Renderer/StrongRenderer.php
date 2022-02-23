@@ -14,11 +14,11 @@ class StrongRenderer implements NodeRendererInterface
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
         if (!($node instanceof Strong)) {
-            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));
+            throw new InvalidArgumentException('Incompatible inline type: '.get_class($node));
         }
 
         $ops = unserialize($childRenderer->renderNodes($node->children()), [
-            'allowed_classes' => [DeltaOp::class]
+            'allowed_classes' => [DeltaOp::class],
         ]);
 
         DeltaOp::applyAttributes($ops, ['bold' => true]);

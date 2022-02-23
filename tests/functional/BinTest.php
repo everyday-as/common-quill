@@ -71,6 +71,6 @@ class BinTest extends AbstractBinTest
      */
     protected function getPathToData(string $file): string
     {
-        return realpath(__DIR__ . '/data/' . $file);
+        return realpath(__DIR__.'/data/'.$file);
     }
 }

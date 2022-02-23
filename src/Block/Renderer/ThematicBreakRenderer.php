@@ -14,7 +14,7 @@ class ThematicBreakRenderer implements NodeRendererInterface
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
         if (!($node instanceof ThematicBreak)) {
-            throw new InvalidArgumentException('Incompatible block type: ' . get_class($node));
+            throw new InvalidArgumentException('Incompatible block type: '.get_class($node));
         }
 
         return serialize(DeltaOp::text("\n"));

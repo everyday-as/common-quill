@@ -17,11 +17,11 @@ class ParagraphRenderer implements NodeRendererInterface
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
         if (!($node instanceof Paragraph)) {
-            throw new InvalidArgumentException('Incompatible block type: ' . get_class($node));
+            throw new InvalidArgumentException('Incompatible block type: '.get_class($node));
         }
 
         $ops = unserialize($childRenderer->renderNodes($node->children()), [
-            'allowed_classes' => [DeltaOp::class]
+            'allowed_classes' => [DeltaOp::class],
         ]);
 
         if (!$this->inTightList($node)) {

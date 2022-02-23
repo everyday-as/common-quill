@@ -25,7 +25,7 @@ class Converter implements ConverterInterface
         $document = $this->markdownParser->parse($commonMark);
 
         $delta = new Delta(unserialize($this->quillRenderer->renderDocument($document)->getContent(), [
-            'allowed_classes' => [DeltaOp::class]
+            'allowed_classes' => [DeltaOp::class],
         ]));
 
         $delta->compact();
@@ -39,8 +39,8 @@ class Converter implements ConverterInterface
      * @param string $commonMark
      *
      * @return Delta
-     * @see Converter::convertToQuill
      *
+     * @see Converter::convertToQuill
      */
     public function __invoke(string $commonMark): Delta
     {

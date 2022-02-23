@@ -14,7 +14,7 @@ class TextRenderer implements NodeRendererInterface
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
         if (!($node instanceof Text)) {
-            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));
+            throw new InvalidArgumentException('Incompatible inline type: '.get_class($node));
         }
 
         return serialize(DeltaOp::text($node->getLiteral()));
