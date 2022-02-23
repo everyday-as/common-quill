@@ -23,7 +23,8 @@
     "league/commonmark": "^2.2",
     "mikehaertl/php-shellcommand": "^1.4",
     "everyday/php-quill-delta": "^0.1",
-    "everyday/html-to-quill": "^0.4"
+    "everyday/html-to-quill": "^0.4",
+    "nikic/php-parser": "^4.13"
   },
   "require-dev": {
     "pestphp/pest": "^1.21",
