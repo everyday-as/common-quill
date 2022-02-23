@@ -24,7 +24,7 @@ class LocalDataTest extends TestCase
 
     /**
      * @param string $markdown Markdown to parse
-     * @param string $array Expected result
+     * @param string $array    Expected result
      * @param string $testName Name of the test
      *
      * @dataProvider dataProvider
@@ -35,9 +35,9 @@ class LocalDataTest extends TestCase
         $actualResult = json_encode($this->converter->convertToQuill($markdown));
 
         $failureMessage = sprintf('Unexpected result for "%s" test', $testName);
-        $failureMessage .= "\n=== markdown ===============\n" . $markdown;
-        $failureMessage .= "\n=== expected ===============\n" . json_encode($array);
-        $failureMessage .= "\n=== got ====================\n" . $actualResult;
+        $failureMessage .= "\n=== markdown ===============\n".$markdown;
+        $failureMessage .= "\n=== expected ===============\n".json_encode($array);
+        $failureMessage .= "\n=== got ====================\n".$actualResult;
 
         $this->assertEquals($array, json_decode($actualResult, true), $failureMessage);
     }
@@ -49,7 +49,7 @@ class LocalDataTest extends TestCase
     {
         $finder = new Finder();
         $finder->files()
-            ->in(__DIR__ . '/data')
+            ->in(__DIR__.'/data')
             ->depth('> 0')
             ->name('*.md');
 
@@ -61,7 +61,7 @@ class LocalDataTest extends TestCase
             $markdown = $markdownFile->getContents();
             $relativePath = $markdownFile->getRelativePath();
 
-            $array = json_decode(file_get_contents(__DIR__ . '/data/' . $relativePath . '/' . $testName . '.json'), true);
+            $array = json_decode(file_get_contents(__DIR__.'/data/'.$relativePath.'/'.$testName.'.json'), true);
 
             $ret[] = [$markdown, $array, $testName];
         }

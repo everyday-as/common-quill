@@ -14,7 +14,7 @@ class IndentedCodeRenderer implements NodeRendererInterface
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
         if (!($node instanceof IndentedCode)) {
-            throw new InvalidArgumentException('Incompatible block type: ' . get_class($node));
+            throw new InvalidArgumentException('Incompatible block type: '.get_class($node));
         }
 
         return serialize(DeltaOp::text($node->getLiteral(), ['code-block' => true]));

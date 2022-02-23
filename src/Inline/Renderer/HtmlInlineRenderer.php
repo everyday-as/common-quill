@@ -22,7 +22,7 @@ class HtmlInlineRenderer implements NodeRendererInterface
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
         if (!($node instanceof HtmlInline)) {
-            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));
+            throw new InvalidArgumentException('Incompatible inline type: '.get_class($node));
         }
 
         // TODO: Render the HTML inline to a Quill delta

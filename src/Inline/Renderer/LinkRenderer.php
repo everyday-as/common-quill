@@ -19,7 +19,7 @@ class LinkRenderer implements NodeRendererInterface, ConfigurationAwareInterface
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
         if (!($node instanceof Link)) {
-            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));
+            throw new InvalidArgumentException('Incompatible inline type: '.get_class($node));
         }
 
         $target = $node->data['attributes']['target'] ?? null;
@@ -31,7 +31,7 @@ class LinkRenderer implements NodeRendererInterface, ConfigurationAwareInterface
 
         /** @var DeltaOp[] $ops */
         $ops = unserialize($childRenderer->renderNodes($node->children()), [
-            'allowed_classes' => [DeltaOp::class]
+            'allowed_classes' => [DeltaOp::class],
         ]);
 
         DeltaOp::applyAttributes($ops, compact('link', 'target'));
