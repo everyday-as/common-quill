@@ -1,0 +1,19 @@
+{
+  "ops": [
+    {
+      "insert": "indented code\n",
+      "attributes": {
+        "code-block": true
+      }
+    },
+    {
+      "insert": "Link",
+      "attributes": {
+        "link": "https://example.com"
+      }
+    },
+    {
+      "insert": "\n"
+    }
+  ]
+}

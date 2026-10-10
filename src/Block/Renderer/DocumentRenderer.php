@@ -29,6 +29,10 @@ class DocumentRenderer implements NodeRendererInterface, ConfigurationAwareInter
             $ops[0]->setInsert(ltrim($ops[0]->getInsert()));
         }
 
+        if (!empty($ops) && end($ops)->hasAttribute('code-block')) {
+            $ops[] = DeltaOp::text("\n");
+        }
+
         return serialize($ops);
     }
 
