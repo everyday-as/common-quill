@@ -17,6 +17,11 @@ class FencedCodeRenderer implements NodeRendererInterface
             throw new InvalidArgumentException('Incompatible block type: '.get_class($node));
         }
 
-        return serialize(DeltaOp::text($node->getLiteral(), ['code-block' => true]));
+        $literal = $node->getLiteral();
+        if (!str_ends_with($literal, "\n")) {
+            $literal .= "\n";
+        }
+
+        return serialize(DeltaOp::text($literal, ['code-block' => true]));
     }
 }

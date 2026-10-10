@@ -3,6 +3,7 @@
 namespace Everyday\CommonQuill\Tests\Functional;
 
 use Everyday\CommonQuill\QuillConverter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -27,8 +28,8 @@ class LocalDataTest extends TestCase
      * @param string $array    Expected result
      * @param string $testName Name of the test
      *
-     * @dataProvider dataProvider
      */
+    #[DataProvider('dataProvider')]
     public function testExample($markdown, $array, $testName): void
     {
         // hack, I know
@@ -45,7 +46,7 @@ class LocalDataTest extends TestCase
     /**
      * @return array
      */
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         $finder = new Finder();
         $finder->files()
